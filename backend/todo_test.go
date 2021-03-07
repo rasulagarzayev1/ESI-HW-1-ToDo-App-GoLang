@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	_ "fmt"
 	"github.com/stretchr/testify/assert"
 	_ "github.com/stretchr/testify/assert"
@@ -12,6 +13,9 @@ import (
 	"testing"
 	_ "testing"
 )
+
+
+
 
 func TestGetRequest(t *testing.T) {
 	router := setupRouter()
@@ -30,27 +34,38 @@ func TestGetRequestId(t *testing.T) {
 }
 
 func TestPostRequest(t *testing.T) {
+
 	router := setupRouter()
 	w := httptest.NewRecorder()
-	body:= []byte(`{{
-		"Title": "adeu",
-			"Status": true,
-			"Level": 3
-	}`)
-	req, _ := http.NewRequest("GET", "/api/v1/tasks", bytes.NewBuffer(body))
+
+	postBody, _ := json.Marshal(map[string]string{
+		"title": "some title",
+	})
+	responseBody := bytes.NewBuffer(postBody)
+
+	//resp, _ := http.Post("http://localhost:8080/api/v1/tasks/", "application/json", responseBody)
+	req, _ := http.NewRequest("POST", "/api/v1/tasks", responseBody)
+	req.Header.Add("Content-Type", "application/json")
+
 	router.ServeHTTP(w, req)
-	assert.Equal(t, 200, w.Code)
+	assert.Equal(t, 201, w.Code)
 }
 
+
 func TestPutRequest(t *testing.T) {
+
 	router := setupRouter()
 	w := httptest.NewRecorder()
-	body:= []byte(`{{
-		"Title": "adeu",
-			"Status": true,
-			"Level": 3
-	}`)
-	req, _ := http.NewRequest("GET", "/api/v1/tasks", bytes.NewBuffer(body))
+
+	postBody, _ := json.Marshal(map[string]string{
+		"title": "some modification",
+	})
+	responseBody := bytes.NewBuffer(postBody)
+
+	//resp, _ := http.Post("http://localhost:8080/api/v1/tasks/", "application/json", responseBody)
+	req, _ := http.NewRequest("PUT", "/api/v1/tasks/4", responseBody)
+	req.Header.Add("Content-Type", "application/json")
+
 	router.ServeHTTP(w, req)
 	assert.Equal(t, 200, w.Code)
 }

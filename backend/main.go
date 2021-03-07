@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/stretchr/testify/assert"
+	_ "testing"
 )
 
 type Tasks struct {
@@ -40,8 +41,13 @@ func AddTask(c *gin.Context) {
 
 	var task Tasks
 	c.Bind(&task)
+	fmt.Println("skereeeeeeeeeeeeeeeee")
+	fmt.Println(c.Request.Header)
+	fmt.Println("skereeeeeeeeeeeeeeeee")
+
 
 	if task.Title != "" {
+		fmt.Print("entro a la creacio	")
 		db.Create(&task)
 		c.JSON(201, gin.H{"success": task})
 	} else {
@@ -148,10 +154,12 @@ func DeleteTask(c *gin.Context) {
 // DB FUnctions
 
 func main() {
-	fmt.Println("hijodeputaaa")
+	r := setupRouter()
+	r.Run(":8080")
+}
 
+func setupRouter() *gin.Engine {
 	r := gin.Default()
-
 	v1 := r.Group("api/v1")
 	{
 		v1.POST("/tasks", AddTask)
@@ -160,6 +168,5 @@ func main() {
 		v1.PUT("/tasks/:id", UpdateTask)
 		v1.DELETE("/tasks/:id", DeleteTask)
 	}
-
-	r.Run(":8000")
+	return r
 }
