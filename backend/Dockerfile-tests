@@ -12,6 +12,6 @@ COPY . .
 
 RUN go build
 
-RUN go test > tests-results.txt
+RUN go test >> tests-results.txt
 
 RUN echo "Executing tests, results can be found at tests-results.txt"
