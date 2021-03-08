@@ -14,9 +14,6 @@ import (
 	_ "testing"
 )
 
-
-
-
 func TestGetRequest(t *testing.T) {
 	router := setupRouter()
 	w := httptest.NewRecorder()
@@ -43,7 +40,6 @@ func TestPostRequest(t *testing.T) {
 	})
 	responseBody := bytes.NewBuffer(postBody)
 
-	//resp, _ := http.Post("http://localhost:8080/api/v1/tasks/", "application/json", responseBody)
 	req, _ := http.NewRequest("POST", "/api/v1/tasks", responseBody)
 	req.Header.Add("Content-Type", "application/json")
 
@@ -62,7 +58,6 @@ func TestPutRequest(t *testing.T) {
 	})
 	responseBody := bytes.NewBuffer(postBody)
 
-	//resp, _ := http.Post("http://localhost:8080/api/v1/tasks/", "application/json", responseBody)
 	req, _ := http.NewRequest("PUT", "/api/v1/tasks/4", responseBody)
 	req.Header.Add("Content-Type", "application/json")
 

@@ -1,12 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
-	_ "github.com/stretchr/testify/assert"
-	_ "testing"
 )
 
 type Tasks struct {
@@ -41,13 +38,8 @@ func AddTask(c *gin.Context) {
 
 	var task Tasks
 	c.Bind(&task)
-	fmt.Println("skereeeeeeeeeeeeeeeee")
-	fmt.Println(c.Request.Header)
-	fmt.Println("skereeeeeeeeeeeeeeeee")
-
 
 	if task.Title != "" {
-		fmt.Print("entro a la creacio	")
 		db.Create(&task)
 		c.JSON(201, gin.H{"success": task})
 	} else {
