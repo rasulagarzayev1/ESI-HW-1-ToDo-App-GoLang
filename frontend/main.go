@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/rasulagarzayev1/front/cmd"
+import "github.com/HashimovH/front/cmd"
 
 func main() {
 	cmd.Execute()
