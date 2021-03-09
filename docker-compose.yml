@@ -11,11 +11,11 @@ services:
       dockerfile: Dockerfile
     ports:
       # map port 8080 on the host OS to the port defined in .env
-      - 4000:4000
+      - 8080:8080
   api-tests:
     build:
       context: backend
       dockerfile: Dockerfile-tests
     ports:
       # map port 8080 on the host OS to the port defined in .env
-      - 4000:4000
+      - 8081:8081
