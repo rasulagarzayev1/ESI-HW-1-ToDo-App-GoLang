@@ -12,6 +12,6 @@ COPY . .
 
 RUN go build
 
-RUN echo "Executing tests, results can be found at tests-results.txt"
+RUN echo "Executing tests"
 
 CMD ["/bin/sh", "-c", "go test > output.txt"]
