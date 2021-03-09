@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/mattn/go-sqlite3"
@@ -148,10 +146,12 @@ func DeleteTask(c *gin.Context) {
 // DB FUnctions
 
 func main() {
-	fmt.Println("hijodeputaaa")
+	r := setupRouter()
+	r.Run(":8080")
+}
 
+func setupRouter() *gin.Engine {
 	r := gin.Default()
-
 	v1 := r.Group("api/v1")
 	{
 		v1.POST("/tasks", AddTask)
@@ -160,6 +160,5 @@ func main() {
 		v1.PUT("/tasks/:id", UpdateTask)
 		v1.DELETE("/tasks/:id", DeleteTask)
 	}
-
-	r.Run(":8000")
+	return r
 }
