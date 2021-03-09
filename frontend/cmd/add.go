@@ -20,7 +20,6 @@ import (
     "encoding/json"
     "fmt"
     "net/http"
-	"io"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
@@ -62,10 +61,7 @@ func addNewItem(){
 		fmt.Println(err)
 		color.Red("Something went wrong")
 	}
-	var createdT Tasks
-	bytes, err := io.ReadAll(response.Body)
 
-	json.Unmarshal(bytes, &createdT)
 
 	if string(response.Status) == "201 Created" {
 		color.Green("To do was created successfully")

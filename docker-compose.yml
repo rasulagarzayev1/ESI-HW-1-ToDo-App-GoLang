@@ -19,3 +19,9 @@ services:
     ports:
       # map port 8080 on the host OS to the port defined in .env
       - 8081:8081
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 7000:7000

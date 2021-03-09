@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/HashimovH/front/cmd"
+import "github.com/HashimovH/todo-app-esi/frontend/cmd"
 
 func main() {
 	cmd.Execute()
