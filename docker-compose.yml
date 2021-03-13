@@ -1,0 +1,27 @@
+# This docker service serves 2 purposes:
+# - a self-contained Go build environment
+# - a local execution environment
+
+version: '2'
+
+services:
+  api:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      # map port 8080 on the host OS to the port defined in .env
+      - 8080:8080
+  api-tests:
+    build:
+      context: backend
+      dockerfile: Dockerfile-tests
+    ports:
+      # map port 8080 on the host OS to the port defined in .env
+      - 8081:8081
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 7000:7000
